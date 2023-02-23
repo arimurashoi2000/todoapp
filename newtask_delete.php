@@ -38,13 +38,16 @@ try {
 </h1>
 <form action="newtask_delete_check.php" method="post">
 <input type="hidden" name="newtask_code" value="<?php echo $NewTaskNum;?>">
+<input type="hidden" name="title" value="<?php echo $NewTaskTitle;?>">
+<input type="hidden" name="content" value="<?php echo $NewTaskContents;?>">
+
 <div style="margin: 10px">
         <label for="title">タイトル：</label>
-        <input type="text" name="title" value="<?php echo $NewTaskTitle;?>">
+        <p><?php echo $NewTaskTitle;?></p>
     </div>
     <div style="margin: 10px">
         <label for="content">内容：</label>
-        <input type="text" name="content" value="<?php echo $NewTaskContents;?>">
+        <p><?php echo $NewTaskContents;?></p>
         
     </div>
     <button type="submit" name="post">削除する</button>
