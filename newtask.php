@@ -18,7 +18,7 @@
     </div>
     <div style="margin: 10px">
         <label for="content">内容：</label>
-        <textarea id="content" name="contents" rows="8" cols="40"></textarea>
+        <textarea id="content" name="content" rows="8" cols="40"></textarea>
     </div>
     <input type="submit" name="post" value="投稿する">
 </form>
