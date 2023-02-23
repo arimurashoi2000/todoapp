@@ -10,36 +10,31 @@
 <body>
 <?php
 require_once('putTogether.php');
+require_once('check.php');
+$NewTaskNum = filter_input(INPUT_POST, 'newtask_code');
+$NewTaskNum = htmlspecialchars($NewTaskNum, ENT_QUOTES, 'UTF-8');
 
-if ($NewTaskTitle == '') {
-    echo 'タスク名が入力されていません';
-    echo '<br>';
-} else {
-    echo 'タスク名<br>';
-    echo $NewTaskTitle;
-    echo '<br>';
-}
-
-if ($NewTaskContents == '') {
-    echo '内容が入力されていません';
-} else {
-    echo '内容';
-    echo '<br>';
-    echo $NewTaskContents;
-    echo '<br>';
-}
-
-if ($NewTaskTitle != '' || $NewTaskContents != '') {
-    echo '<form method="post" action="newtask_add_done.php">';
-    echo '<input type="hidden" name="title" value="'.$NewTaskTitle.'">';
-    echo '<input type="hidden" name="contents" value="'.$NewTaskContents.'">';
-    echo '<input type="button" onclick="history.back()" value="戻る">';
-    echo '<input type="submit" value="登録">';
-    echo '</form>';
-} else {
-    echo '<form>';
-    echo '<input type="button" onclick="history.back()" value="戻る">';
-    echo '</form>';
+try {
+    TitleCheck($NewTaskTitle);
+    ContentCheck($NewTaskContents);
+    LengthCheck($NewTaskTitle);
+    //titleとcontentがあってタイトル<20
+    if ($NewTaskTitle != '' && $NewTaskContents != '' && mb_strlen($NewTaskTitle)  < $limit) {
+        echo '<form method="post" action="newtask_add_done.php">';
+        echo '<input type="hidden" name="newtask_code" value="'.$NewTaskNum.'">';
+        echo '<input type="hidden" name="title" value="'.$NewTaskTitle.'">';
+        echo '<input type="hidden" name="content" value="'.$NewTaskContents.'">';
+        echo '<input type="button" onclick="history.back()" value="戻る">';
+        echo '<input type="submit" value="OK">';
+        echo '</form>';
+    } else {
+        echo '<form>';
+        echo '<input type="button" onclick="history.back()" value="戻る">';
+        echo '</form>';
+    }
+    
+} catch (Exception $e) {
+    exit($e->getMessage());
 }
 ?>
 </body>
