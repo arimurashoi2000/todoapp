@@ -4,6 +4,7 @@ require_once('putTogether.php');
 function TitleCheck($NewTaskTitle) {
     if ($NewTaskTitle == '') {
         echo 'タスク名が入力されていません';
+        echo '<br>';
     } else {
         echo 'タスク名<br>';
         echo $NewTaskTitle;
@@ -14,6 +15,7 @@ function TitleCheck($NewTaskTitle) {
 function ContentCheck($NewTaskContents) {
     if ($NewTaskContents == '') {
         echo '内容が入力されていません';
+        echo '<br>';
     } else {
         echo '内容<br>';
         echo $NewTaskContents;
@@ -25,6 +27,7 @@ function LengthCheck($NewTaskTitle) {
     $limit = 20;
     if (mb_strlen($NewTaskTitle) > $limit) {
         echo '文字数が20文字を超えています。';
+        echo '<br>';
     }
 }
 function CheckSend($file)
