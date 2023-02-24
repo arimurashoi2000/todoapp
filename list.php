@@ -44,7 +44,7 @@ try {
 
     if (!empty($search) && !empty($searchWord)) {
         $dbh = db_connect();
-        $searchSql = "SELECT * FROM posts WHERE content LIKE '%$searchWord%'";
+        $searchSql = "SELECT * FROM posts WHERE content LIKE '%$searchWord%' ORDER BY ID DESC";
         $stmt = $dbh->prepare($searchSql);
         $stmt->execute();
     }

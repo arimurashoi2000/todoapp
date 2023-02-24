@@ -23,7 +23,7 @@
     <input type="submit" name="post" value="投稿する">
 </form>
 <form action="index.html">
-    <button type="submit" name="back">戻る</button>
+    <button type="button" name="back" onclick="history.back()">戻る</button>
 </form>
 </body>
 </html>
