@@ -17,7 +17,7 @@ try {
     $counts = $dbh->prepare($countsSql);
     $counts->execute();
     $count = $counts->fetch(PDO::FETCH_ASSOC);
-    $maxPage = floor(($count['cnt']+1)/5+1);
+    $maxPage = ceil($count['cnt']/5);
 
     $sql = 'SELECT * FROM posts ORDER BY ID DESC LIMIT :page, 5';
     $stmt = $dbh->prepare($sql);
@@ -90,24 +90,30 @@ try {
     <?php endwhile; ?>
 </table>
 <p>
-    <?php if ($page = 1): ?>
+    <?php if ($page == 1): ?>
         <a href="?page=<?php echo $page; ?>"><?php echo $page;?></a>
         <a href="?page=<?php echo $page + 1; ?>"><?php echo $page + 1;?></a>
         <a href="?page=<?php echo $page +2; ?>"><?php echo $page +2;?></a>
         <a href="?page=<?php echo $page + 1; ?>">次へ</a>
     <?php endif; ?>
 
-    <?php if ($page > 1): ?>
+    <?php if ($page > 1 && $page != $maxPage): ?>
         <a href="?page=<?php echo $page - 1; ?>">前へ</a>
         <a href="?page=<?php echo $page - 1; ?>"><?php echo $page - 1;?></a>
         <a href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
     <?php endif; ?>
 
-    <?php if ($page<$maxPage): ?>
+    <?php if ($page<$maxPage && $page != 1): ?>
         <a href="?page=<?php echo $page + 1; ?>"><?php echo $page + 1; ?></a>
         <a href="?page=<?php echo $page + 1; ?>">次へ</a>
     <?php endif; ?>
-<?php echo $page; ?><?php echo $maxPage; ?>
+
+    <?php if ($page == $maxPage): ?>
+        <a href="?page=<?php echo $page - 1; ?>">前へ</a>
+        <a href="?page=<?php echo $page - 2; ?>"><?php echo $page -2; ?></a>
+        <a href="?page=<?php echo $page -1; ?>"><?php echo $page -1; ?></a>
+        <a href="?page=<?php echo $page; ?>"><?php echo $page;?></a>
+    <?php endif; ?>
 </p>
 
 

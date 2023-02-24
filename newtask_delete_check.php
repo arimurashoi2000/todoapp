@@ -11,8 +11,8 @@
 <?php
 require_once('putTogether.php');
 require_once('check.php');
-$NewTaskNum = filter_input(INPUT_POST, 'newtask_code');
-$NewTaskNum = htmlspecialchars($newTaskNum, ENT_QUOTES, 'UTF-8');
+$newTaskNum = filter_input(INPUT_POST, 'newtask_code');
+$newTaskNum = htmlspecialchars($newTaskNum, ENT_QUOTES, 'UTF-8');
 
 try {
     TitleCheck($newTaskTitle);

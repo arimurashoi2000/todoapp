@@ -27,8 +27,7 @@ try {
     $newTaskTitle = $rec['title'];
     $newTaskContents = $rec['content'];
 } catch (Exception $e) {
-    $e->getMessage();
-    exit();
+    exit($e->getMessage());
 }
 
 
