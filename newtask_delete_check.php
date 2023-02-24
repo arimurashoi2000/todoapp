@@ -18,11 +18,7 @@ try {
     TitleCheck($newTaskTitle);
     ContentCheck($newTaskContents);
     LengthCheck($newTaskTitle);
-    //存在しないものの時エラーを表示する
-    if ($newTaskTitle != $newTaskTitle || $newTaskContents != $newTaskContents) {
-        echo 'タイトルまたは内容が異なります。';
-        echo '<br>';
-    }
+
     //titleとcontentがあってタイトル<20
     if ($newTaskTitle != '' && $newTaskContents != '' && mb_strlen($newTaskTitle)  < $limit && $newTaskTitle == $newTaskTitle || $newTaskContents == $newTaskContents) {
         echo '<form method="post" action="newtask_delete_done.php">';
@@ -37,7 +33,6 @@ try {
         echo '<input type="button" onclick="history.back()" value="戻る">';
         echo '</form>';
     }
-    
 } catch (Exception $e) {
     exit($e->getMessage());
 }

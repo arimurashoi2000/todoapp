@@ -11,8 +11,8 @@
 try {
     require_once('putTogether.php');
 
-    $NewTaskNum = filter_input(INPUT_POST, 'newtask_code');
-    
+    $newTaskNum = filter_input(INPUT_POST, 'newtask_code');
+
 
     require_once('db_connect.php');
     db_connect();
