@@ -17,14 +17,14 @@ try {
 
     $sql ='INSERT INTO posts (title, content) VALUES (?,?)';
     $stmt = $dbh->prepare($sql);
-    $data[]= $NewTaskTitle;
-    $data[] = $NewTaskContents;
+    $data[]= $newTaskTitle;
+    $data[] = $newTaskContents;
     $stmt->execute($data);
 
     $dbh = null;
 
-    echo $NewTaskTitle.'<br>';
-    echo $NewTaskContents.'<br>';
+    echo $newTaskTitle.'<br>';
+    echo $newTaskContents.'<br>';
     echo 'を登録完了しました。';
     echo '<br>';
 } catch (Exception $e) {

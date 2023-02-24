@@ -12,7 +12,7 @@
 try {
     require_once('putTogether.php');
     //$newtask_title = filter_input(INPUT_POST, 'title');
-    $NewTaskNum = filter_input(INPUT_GET, 'ID');
+    $newTaskNum = filter_input(INPUT_GET, 'ID');
 
     require_once('db_connect.php');
     db_connect();
@@ -20,12 +20,12 @@ try {
 
     $sql = 'SELECT title, content FROM posts WHERE ID= :ID';
     $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(":ID", $NewTaskNum, PDO::PARAM_STR);
+    $stmt->bindParam(":ID", $newTaskNum, PDO::PARAM_STR);
     $stmt->execute();
 
     $rec = $stmt->fetch(PDO::FETCH_ASSOC);
-    $NewTaskTitle = $rec['title'];
-    $NewTaskContents = $rec['content'];
+    $newTaskTitle = $rec['title'];
+    $newTaskContents = $rec['content'];
 } catch (Exception $e) {
     $e->getMessage();
     exit();
@@ -37,17 +37,17 @@ try {
     ToDo Delete Page
 </h1>
 <form action="newtask_delete_check.php" method="post">
-<input type="hidden" name="newtask_code" value="<?php echo $NewTaskNum;?>">
-<input type="hidden" name="title" value="<?php echo $NewTaskTitle;?>">
-<input type="hidden" name="content" value="<?php echo $NewTaskContents;?>">
+<input type="hidden" name="newtask_code" value="<?php echo $newTaskNum;?>">
+<input type="hidden" name="title" value="<?php echo $newTaskTitle;?>">
+<input type="hidden" name="content" value="<?php echo $newTaskContents;?>">
 
 <div style="margin: 10px">
         <label for="title">タイトル：</label>
-        <p><?php echo $NewTaskTitle;?></p>
+        <p><?php echo $newTaskTitle;?></p>
     </div>
     <div style="margin: 10px">
         <label for="content">内容：</label>
-        <p><?php echo $NewTaskContents;?></p>
+        <p><?php echo $newTaskContents;?></p>
         
     </div>
     <button type="submit" name="post">削除する</button>

@@ -4,8 +4,8 @@ try {
     require_once('putTogether.php');
     require_once('db_connect.php');
 
-    $SerchWord = filter_input(INPUT_POST, 'serch_word');
-    $Serch = filter_input(INPUT_POST, 'serch');
+    $serchWord = filter_input(INPUT_POST, 'serch_word');
+    $serch = filter_input(INPUT_POST, 'serch');
 
     db_connect();
     $dbh = db_connect();

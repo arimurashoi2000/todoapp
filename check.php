@@ -1,42 +1,42 @@
 <?php
 require_once('putTogether.php');
 
-function TitleCheck($NewTaskTitle) {
-    if ($NewTaskTitle == '') {
+function TitleCheck($newTaskTitle) {
+    if ($newTaskTitle == '') {
         echo 'タスク名が入力されていません';
         echo '<br>';
     } else {
         echo 'タスク名<br>';
-        echo $NewTaskTitle;
+        echo $newTaskTitle;
         echo '<br>';
     }
 }
 
-function ContentCheck($NewTaskContents) {
-    if ($NewTaskContents == '') {
+function ContentCheck($newTaskContents) {
+    if ($newTaskContents == '') {
         echo '内容が入力されていません';
         echo '<br>';
     } else {
         echo '内容<br>';
-        echo $NewTaskContents;
+        echo $newTaskContents;
         echo '<br>';
     }
 }
 
-function LengthCheck($NewTaskTitle) {
+function LengthCheck($newTaskTitle) {
     $limit = 20;
-    if (mb_strlen($NewTaskTitle) > $limit) {
+    if (mb_strlen($newTaskTitle) > $limit) {
         echo '文字数が20文字を超えています。';
         echo '<br>';
     }
 }
 function CheckSend($file)
 {
-    if ($NewTaskTitle != '' || $NewTaskContents != '' || mb_strlen($NewTaskTitle) > 20) {
+    if ($newTaskTitle != '' || $newTaskContents != '' || mb_strlen($newTaskTitle) > 20) {
         echo '<form method="post" action="$file">';
-        echo '<input type="hidden" name="newtask_code" value="'.$NewTaskNum.'">';
-        echo '<input type="hidden" name="title" value="'.$NewTaskTitle.'">';
-        echo '<input type="hidden" name="content" value="'.$NewTaskContents.'">';
+        echo '<input type="hidden" name="newtask_code" value="'.$newTaskNum.'">';
+        echo '<input type="hidden" name="title" value="'.$newTaskTitle.'">';
+        echo '<input type="hidden" name="content" value="'.$newTaskContents.'">';
         echo '<input type="submit" name="post" value="編集する">';
         echo '<input type="button" onclick="history.back()" value="戻る">';
         echo '</form>';

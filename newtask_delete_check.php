@@ -12,18 +12,23 @@
 require_once('putTogether.php');
 require_once('check.php');
 $NewTaskNum = filter_input(INPUT_POST, 'newtask_code');
-$NewTaskNum = htmlspecialchars($NewTaskNum, ENT_QUOTES, 'UTF-8');
+$NewTaskNum = htmlspecialchars($newTaskNum, ENT_QUOTES, 'UTF-8');
 
 try {
-    TitleCheck($NewTaskTitle);
-    ContentCheck($NewTaskContents);
-    LengthCheck($NewTaskTitle);
+    TitleCheck($newTaskTitle);
+    ContentCheck($newTaskContents);
+    LengthCheck($newTaskTitle);
+    //存在しないものの時エラーを表示する
+    if ($newTaskTitle != $newTaskTitle || $newTaskContents != $newTaskContents) {
+        echo 'タイトルまたは内容が異なります。';
+        echo '<br>';
+    }
     //titleとcontentがあってタイトル<20
-    if ($NewTaskTitle != '' && $NewTaskContents != '' && mb_strlen($NewTaskTitle)  < $limit) {
+    if ($newTaskTitle != '' && $newTaskContents != '' && mb_strlen($newTaskTitle)  < $limit && $newTaskTitle == $newTaskTitle || $newTaskContents == $newTaskContents) {
         echo '<form method="post" action="newtask_delete_done.php">';
-        echo '<input type="hidden" name="newtask_code" value="'.$NewTaskNum.'">';
-        echo '<input type="hidden" name="title" value="'.$NewTaskTitle.'">';
-        echo '<input type="hidden" name="content" value="'.$NewTaskContents.'">';
+        echo '<input type="hidden" name="newtask_code" value="'.$newTaskNum.'">';
+        echo '<input type="hidden" name="title" value="'.$newTaskTitle.'">';
+        echo '<input type="hidden" name="content" value="'.$newTaskContents.'">';
         echo '<input type="button" onclick="history.back()" value="戻る">';
         echo '<input type="submit" value="OK">';
         echo '</form>';

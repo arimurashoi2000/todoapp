@@ -20,9 +20,9 @@ try {
 
     $sql = 'UPDATE posts SET title = :title, content = :content WHERE ID= :ID';
     $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':title', $NewTaskTitle);
-    $stmt->bindParam(':content', $NewTaskContents);
-    $stmt->bindParam(':ID', $NewTaskNum, PDO::PARAM_STR);
+    $stmt->bindParam(':title', $newTaskTitle);
+    $stmt->bindParam(':content', $newTaskContents);
+    $stmt->bindParam(':ID', $newTaskNum, PDO::PARAM_STR);
     $stmt->execute();
 
     $dbh = null;
@@ -32,7 +32,7 @@ try {
 }
 ?>
 <p>ID:</p>
-<?php echo $NewTaskNum; ?>
+<?php echo $newTaskNum; ?>
 
 <p>を修正しました</p>
 <br>

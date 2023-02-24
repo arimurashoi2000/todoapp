@@ -13,12 +13,11 @@ require_once('db_connect.php');
 db_connect();
 $dbh = db_connect();
 try {
-
-    $CountsSql = 'SELECT count(*)  AS cnt FROM posts';
-    $counts = $dbh->prepare($CountsSql);
+    $countsSql = 'SELECT count(*)  AS cnt FROM posts';
+    $counts = $dbh->prepare($countsSql);
     $counts->execute();
     $count = $counts->fetch(PDO::FETCH_ASSOC);
-    $MaxPage = floor(($count['cnt']+1)/5+1);
+    $maxPage = floor(($count['cnt']+1)/5+1);
 
     $sql = 'SELECT * FROM posts ORDER BY ID DESC LIMIT :page, 5';
     $stmt = $dbh->prepare($sql);
@@ -31,23 +30,22 @@ try {
     $start = ($page - 1) * 5;
     $stmt->bindParam(":page", $start, PDO::PARAM_INT);
     $stmt->execute();
-
 } catch(Exception $e) {
     $e->getMessage();
     //exit();
 }
 
 try {
-    $SearchWord = filter_input(INPUT_POST, 'search_word');
+    $searchWord = filter_input(INPUT_POST, 'search_word');
     $search = filter_input(INPUT_POST, 'search');
 
-    $SearchWord = htmlspecialchars($SearchWord, ENT_QUOTES, 'UTF-8');
-    $search = htmlspecialchars($SearchWord, ENT_QUOTES, 'UTF-8');
+    $searchWord = htmlspecialchars($searchWord, ENT_QUOTES, 'UTF-8');
+    $search = htmlspecialchars($searchWord, ENT_QUOTES, 'UTF-8');
 
-    if (!empty($search) && !empty($SearchWord)) {
+    if (!empty($search) && !empty($searchWord)) {
         $dbh = db_connect();
-        $SearchSql = "SELECT * FROM posts WHERE content LIKE '%$SearchWord%'";
-        $stmt = $dbh->prepare($SearchSql);
+        $searchSql = "SELECT * FROM posts WHERE content LIKE '%$searchWord%'";
+        $stmt = $dbh->prepare($searchSql);
         $stmt->execute();
     }
 } catch(Exception $e) {
@@ -93,20 +91,23 @@ try {
 </table>
 <p>
     <?php if ($page = 1): ?>
-        <a href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
-        <a href="?page=<?php echo $page + 1; ?>"><?php echo $page + 1; ?></a>
+        <a href="?page=<?php echo $page; ?>"><?php echo $page;?></a>
+        <a href="?page=<?php echo $page + 1; ?>"><?php echo $page + 1;?></a>
+        <a href="?page=<?php echo $page +2; ?>"><?php echo $page +2;?></a>
+        <a href="?page=<?php echo $page + 1; ?>">次へ</a>
     <?php endif; ?>
 
     <?php if ($page > 1): ?>
         <a href="?page=<?php echo $page - 1; ?>">前へ</a>
         <a href="?page=<?php echo $page - 1; ?>"><?php echo $page - 1;?></a>
+        <a href="?page=<?php echo $page; ?>"><?php echo $page; ?></a>
     <?php endif; ?>
-    
-    <?php if ($page<$MaxPage): ?>
+
+    <?php if ($page<$maxPage): ?>
         <a href="?page=<?php echo $page + 1; ?>"><?php echo $page + 1; ?></a>
         <a href="?page=<?php echo $page + 1; ?>">次へ</a>
     <?php endif; ?>
-
+<?php echo $page; ?><?php echo $maxPage; ?>
 </p>
 
 

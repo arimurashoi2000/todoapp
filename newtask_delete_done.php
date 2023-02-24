@@ -18,13 +18,13 @@ try {
 
     $sql = 'DELETE FROM posts WHERE ID= :ID';
     $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(":ID", $NewTaskNum, PDO::PARAM_STR);
+    $stmt->bindParam(":ID", $newTaskNum, PDO::PARAM_STR);
     $stmt->execute();
 } catch (Exception $e) {
     exit($e->getMessage());
 }
 ?>
-<?php echo $NewTaskTitle; ?>
+<?php echo $newTaskTitle; ?>
 <p>を削除しました</p>
 <br>
 <a href="list.php">戻る</a>
